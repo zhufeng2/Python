@@ -1,6 +1,6 @@
 import pyperclip
 while(1==1):
-    c=input("è¾“å…¥latexå…¬å¼ï¼š")
+    c=input("ÊäÈëlatex¹«Ê½£º")
     if c=="0":
         break
     else:
