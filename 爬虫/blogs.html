@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta name="description" content="昨天带伙伴萌学习python爬虫，准备了几个简单的入门实例 涉及主要知识点: web是如何交互的 requests库的get、post函数的应用 response对象的相关函数，属性 python文件" />
+    <meta property="og:description" content="昨天带伙伴萌学习python爬虫，准备了几个简单的入门实例 涉及主要知识点: web是如何交互的 requests库的get、post函数的应用 response对象的相关函数，属性 python文件" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>10个python爬虫入门实例 - h3zh1 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Ey2dEx6TCJEMq7i5rGGloHkehiHv58PKGLPsLJ6UZME" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/h3zh1/custom.css?v=NCdFqM/DUxa/jCKIBKRpgvDvrbE=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/h3zh1/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/h3zh1/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/h3zh1/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 588559;
+        var currentBlogApp = 'h3zh1';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleMemory';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-03-22 10:30';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=PjiBvg1YcXX76a9_P7Fm2d90D0nqx4dvpdaDNs1tl_Q"></script>
+    
+    
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=oS4PkibyMjZ9rGD5XAcLt99uW_s76Javy2up4dbnZNY" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" onclick="logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/h3zh1/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/h3zh1/">h3zh1</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/h3zh1/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/h3zh1">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/h3zh1/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/h3zh1/p/12548946.html">
+    <span>10个python爬虫入门实例</span>
+    
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="昨天带伙伴萌学习python爬虫，准备了几个简单的入门实例">昨天带伙伴萌学习python爬虫，准备了几个简单的入门实例</h1>
+<blockquote>
+<p>涉及主要知识点:</p>
+<ol>
+<li>web是如何交互的</li>
+<li>requests库的get、post函数的应用</li>
+<li>response对象的相关函数，属性</li>
+<li>python文件的打开，保存</li>
+</ol>
+</blockquote>
+<p><strong>代码中给出了注释，并且可以直接运行哦</strong></p>
+<p><strong>如何安装requests库(安装好python的朋友可以直接参考，没有的，建议先装一哈python环境)</strong></p>
+<h3 id="windows用户，linux用户几乎一样"><strong>windows用户，</strong>Linux用户几乎一样:</h3>
+<p><strong>打开cmd输入以下命令即可，如果python的环境在C盘的目录，会提示权限不够，只需以管理员方式运行cmd窗口</strong></p>
+<pre><code class="language-bash">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<p>Linux用户类似(ubantu为例):   权限不够的话在命令前加入sudo即可</p>
+<pre><code class="language-bash">sudo pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="1爬取强大的bd页面，打印页面信息">1.爬取强大的BD页面，打印页面信息</h3>
+<pre><code class="language-python"># 第一个爬虫示例,爬取百度页面
+
+import requests #导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.get("http://www.baidu.com")  #生成一个response对象
+
+response.encoding = response.apparent_encoding #设置编码格式
+
+print("状态码:"+ str( response.status_code ) ) #打印状态码
+
+print(response.text)#输出爬取的信息
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="2常用方法之get方法实例，下面还有传参实例">2.常用方法之get方法实例，下面还有传参实例</h3>
+<pre><code class="language-python"># 第二个get方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.get("http://httpbin.org/get")  #get方法
+
+print( response.status_code ) #状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="3-常用方法之post方法实例，下面还有传参实例">3. 常用方法之post方法实例，下面还有传参实例</h3>
+<pre><code class="language-python"># 第三个 post方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.post("http://httpbin.org/post")  #post方法访问
+
+print( response.status_code ) #状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="4-put方法实例">4. put方法实例</h3>
+<pre><code class="language-python"># 第四个 put方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.put("http://httpbin.org/put")  # put方法访问
+
+print( response.status_code ) #状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="5常用方法之get方法传参实例1">5.常用方法之get方法传参实例(1)</h3>
+<p>如果需要传多个参数只需要用&amp;符号连接即可如下</p>
+<pre><code class="language-python"># 第五个 get传参方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.get("http://httpbin.org/get?name=hezhi&amp;age=20")  # get传参
+
+print( response.status_code ) #状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="6常用方法之get方法传参实例2">6.常用方法之get方法传参实例(2)</h3>
+<p>params用字典可以传多个</p>
+<pre><code class="language-python"># 第六个 get传参方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+data = {
+	"name":"hezhi",
+	"age":20
+}
+response = requests.get( "http://httpbin.org/get" , params=data )  # get传参
+
+print( response.status_code ) #状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="7常用方法之post方法传参实例2-和上一个有没有很像">7.常用方法之post方法传参实例(2) 和上一个有没有很像</h3>
+<pre><code># 第七个 post传参方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+data = {
+	"name":"hezhi",
+	"age":20
+}
+response = requests.post( "http://httpbin.org/post" , params=data )  # post传参
+
+print( response.status_code ) #状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="8关于绕过反爬机制，以zh爸爸为例">8.关于绕过反爬机制，以zh爸爸为例</h3>
+<pre><code class="language-python"># 第好几个方法实例
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.get( "http://www.zhihu.com")  #第一次访问知乎，不设置头部信息
+
+print( "第一次,不设头部信息,状态码:"+response.status_code )# 没写headers，不能正常爬取，状态码不是 200
+
+#下面是可以正常爬取的区别，更改了User-Agent字段
+
+headers = {
+
+		"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+
+}#设置头部信息,伪装浏览器
+
+response = requests.get( "http://www.zhihu.com" , headers=headers )  #get方法访问,传入headers参数，
+
+print( response.status_code ) # 200！访问成功的状态码
+
+print( response.text )
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="9爬取信息并保存到本地">9.爬取信息并保存到本地,</h3>
+<h3 id="因为目录关系，在d盘建立了一个叫做爬虫的文件夹，然后保存信息">因为目录关系，在D盘建立了一个叫做爬虫的文件夹，然后保存信息</h3>
+<p><strong>注意文件保存时的encoding设置</strong></p>
+<pre><code class="language-python"># 爬取一个html并保存
+
+import requests
+
+url = "http://www.baidu.com"
+
+response = requests.get( url )
+
+response.encoding = "utf-8" #设置接收编码格式
+
+print("\nr的类型" + str( type(response) ) )
+
+print("\n状态码是:" + str( response.status_code ) )
+
+print("\n头部信息:" + str( response.headers ) )
+
+print( "\n响应内容:" )
+
+print( response.text )
+
+#保存文件
+file = open("D:\\爬虫\\baidu.html","w",encoding="utf-8")  #打开一个文件，w是文件不存在则新建一个文件，这里不用wb是因为不用保存成二进制
+
+file.write( response.text )
+
+file.close()
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id="10爬取图片，保存到本地">10.爬取图片，保存到本地</h3>
+<pre><code class="language-python">#保存百度图片到本地
+
+import requests #先导入爬虫的库，不然调用不了爬虫的函数
+
+response = requests.get("https://www.baidu.com/img/baidu_jgylogo3.gif")  #get方法的到图片响应
+
+file = open("D:\\爬虫\\baidu_logo.gif","wb") #打开一个文件,wb表示以二进制格式打开一个文件只用于写入
+
+file.write(response.content) #写入文件
+
+file.close()#关闭操作，运行完毕后去你的目录看一眼有没有保存成功
+</code></pre>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" loading="lazy"></p>
+<h3 id=""></h3>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-22 22:30</span>&nbsp;
+<a href="https://www.cnblogs.com/h3zh1/">h3zh1</a>&nbsp;
+阅读(<span id="post_view_count">34640</span>)&nbsp;
+评论(<span id="post_comment_count">7</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12548946" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12548946);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 588559, cb_blogApp = 'h3zh1', cb_blogUserGuid = '5d48d3ee-181d-44e2-3146-08d7b205ed8e';
+    var cb_entryId = 12548946, cb_entryCreatedDate = '2020-03-22 22:30', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+   </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 h3zh1
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>
