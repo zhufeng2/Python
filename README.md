@@ -5,5 +5,8 @@
 ## python爬虫
 [初见网络爬虫](https://github.com/zhufeng2/Python/blob/master/%E7%88%AC%E8%99%AB/%E7%AC%94%E8%AE%B0/%E5%88%9D%E8%A7%81%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB.md)
 ## python科学计算
+[]()
+[]()
+[]()
 ## python web开发（flask）
 
