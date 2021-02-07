@@ -14,7 +14,7 @@ def getSogouImag(category, length, path):
     jd = jd['all_items']
     imgs_url = []
     for j in jd:
-        imgs_url.append(j['bthumbUrl'])
+        imgs_url.append(j['pic_url'])
     m = 0
     for img_url in imgs_url:
         print('***** ' + str(m) + '.jpg *****' + '   Downloading...')

@@ -1,8 +1,3 @@
----
-title: 绘图
-tags:  matpotlib
-notebook: python科学计算
----
 # matplotlib绘图
 ## 如何绘制多个子图：
 两个函数，`subplot`和`subplots`：`fig, axes = plt.subplots(23)：`即表示一次性在figure上创建成2*3的网格，使用`plt.subplot()`只能一个一个的添加。
