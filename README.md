@@ -8,7 +8,7 @@
 
 [函数与模块的作用](https://github.com/zhufeng2/Python/blob/master/%E5%9F%BA%E7%A1%80/%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%9C%E7%94%A8.md)
 
-[pygame游戏设计](https://github.com/zhufeng2/Python/tree/master/pygame%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1)
+[外星人入侵](https://github.com/zhufeng2/Python/tree/master/%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5%E6%B8%B8%E6%88%8F)
 
 ## Linux基础知识
 
