@@ -1,8 +1,8 @@
 import pygame
 from pygame.sprite import Sprite
 
-
-class Bullet:
+# 子类继承父类Sprite
+class Bullet(Sprite):
     def __init__(self, ai_settings, screen, ship):
         # 在飞船所处的位置创建一个子弹对象
         super().__init__()
