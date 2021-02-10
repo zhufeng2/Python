@@ -5,7 +5,7 @@ You can use the [editor on GitHub](https://github.com/zhufeng2/Python/edit/gh-pa
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 ### Markdown
-[symbols](https://github.com/zhufeng2/Python/blob/master/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/%E7%AC%A6%E5%8F%B7%E8%AE%A1%E7%AE%97.html)
+[symbols](http://htmlpreview.github.io/?https://github.com/zhufeng2/Python/blob/master/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/%E7%AC%A6%E5%8F%B7%E8%AE%A1%E7%AE%97.html)
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
